@@ -12,7 +12,6 @@ public class ResistorsAuto extends OpMode{
     private void turnRad(float rad){
 
     }
-
     @Override public void start(){
 
     }
