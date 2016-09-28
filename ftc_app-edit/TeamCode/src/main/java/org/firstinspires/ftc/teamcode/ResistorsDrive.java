@@ -95,6 +95,6 @@ public class ResistorsDrive extends OpMode{
         rHW.leftDrive2.setPower(0);
         rHW.rightDrive.setPower(0);
         rHW.rightDrive2.setPower(0);
-        //Emergency Protocal! Stop everything!
+        //Emergency Protocol! Stop everything!
     }
 }
