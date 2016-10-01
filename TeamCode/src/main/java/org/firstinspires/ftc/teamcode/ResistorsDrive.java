@@ -87,15 +87,16 @@ public class ResistorsDrive extends OpMode{
         //Instead of the joysticks directly controlling the power, it controls the change in power, or throttle. Feels more like a car
         //No fkin clue if this'll work, I (Zheng) just pulled this out of my arse
     }
-    private void setArm(){
-        rHW.leftArm.setPosition(-gamepad2.left_stick_y);
-        rHW.rightArm.setPosition(-gamepad2.right_stick_y);
-        rHW.leftArm2.setPosition(-gamepad2.left_stick_x);
-        rHW.rightArm2.setPosition(-gamepad2.right_stick_x);
+    private void setArm(float scaleVert,float scaleHora){
+        rHW.leftArm.setPosition(-gamepad2.left_stick_y*scaleVert);
+        rHW.rightArm.setPosition(-gamepad2.right_stick_y*scaleVert);
+        rHW.leftArm2.setPosition(-gamepad2.left_stick_x*scaleHora);
+        rHW.rightArm2.setPosition(-gamepad2.right_stick_x*scaleHora);
     }
     @Override public void loop(){
         standardDrive(-gamepad1.left_stick_y,-gamepad1.right_stick_y);
         brakeCheck();
+        setArm(1,1);
     }
     @Override public void stop(){
         rHW.leftDrive.setPower(0);
