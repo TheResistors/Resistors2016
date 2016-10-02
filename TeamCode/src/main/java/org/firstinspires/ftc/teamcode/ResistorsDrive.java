@@ -43,7 +43,7 @@ public class ResistorsDrive extends OpMode{
             rHW.rightDrive2.setPower(0);
         }
         //This is the standard drive loop. It *almost* most definitely works, so when sh*t hits the fan we use this.
-        //Btw, it does the cancer jerk around thing. So, don't use if you aren't a xbox god
+        //Btw, it does the cancer jerk around thing. So, don't use if you aren't a(n) xbox god
     }
     private void tunedDrive(float left, float right, float leftTune, float rightTune){
         if (Math.abs(left) > thresholdJoyStick){
@@ -60,7 +60,7 @@ public class ResistorsDrive extends OpMode{
             rHW.rightDrive.setPower(0);
             rHW.rightDrive2.setPower(0);
         }
-        //Just in case the Mechanics can't balance the robot right, and it starts turning just tune the thingy
+        //Just in case the Mechanics can't balance the robot right, and it starts turning just tune the motors to a proper power output
         //I guess for now, just try random tuning numbers to get it relatively straight
     }
     private void throttleDrive(){
