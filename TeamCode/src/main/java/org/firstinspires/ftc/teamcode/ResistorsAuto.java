@@ -8,7 +8,11 @@ public class ResistorsAuto extends OpMode{
     float circumference = diameter * pi;
     float robotWidth = 0.45f;
     float speed = 0.5f;
-    float angularSpeed = 0.5f;
+    float turningSpeed = 0.5f;
+    float leftTune = 1;
+    float rightTune = 1;
+    boolean right = true;
+    boolean left = false;
     ResistorsHardware rHW = new ResistorsHardware();
     private void forward(float meters){
         if(meters > rHW.leftDrive.getCurrentPosition() * circumference / 360){
@@ -26,22 +30,12 @@ public class ResistorsAuto extends OpMode{
     }
     private void turnRad(float rad,boolean direction){//Right is true, left is false
         float distance = (robotWidth/2) * rad;
-        if (direction){
-            if(distance > rHW.leftDrive.getCurrentPosition() *robotWidth*pi/360){
-                rHW.leftDrive.setPower(angularSpeed);
-                rHW.leftDrive2.setPower(angularSpeed);
-                rHW.rightDrive.setPower(-angularSpeed);
-                rHW.leftDrive2.setPower(-angularSpeed);
-            }
-        }else{
-            if(distance > rHW.leftDrive.getCurrentPosition() *robotWidth*pi/360){
-                rHW.leftDrive.setPower(-angularSpeed);
-                rHW.leftDrive2.setPower(-angularSpeed);
-                rHW.rightDrive.setPower(angularSpeed);
-                rHW.leftDrive2.setPower(angularSpeed);
-            }
+        if(distance > rHW.leftDrive.getCurrentPosition()){
+            rHW.leftDrive.setPower(turningSpeed * leftTune * (direction ? 1 : -1));
+            rHW.leftDrive2.setPower(turningSpeed * leftTune * (direction ? 1 : -1));
+            rHW.rightDrive.setPower(-turningSpeed * rightTune * (direction ? 1 : -1));
+            rHW.rightDrive2.setPower(-turningSpeed * rightTune * (direction ? 1 : -1));
         }
-
     }
     @Override public void start(){}
     @Override public void init(){
@@ -51,7 +45,7 @@ public class ResistorsAuto extends OpMode{
     private void justDrive(){
         for(int i= 0; i < 4; i++){
             forward(1);
-            turnRad(pi/2,true);
+            turnRad(pi/2,right);
         }
         //Just for testing stuff
         //This should go into a meter square that turns right and it should stop at the same place.
