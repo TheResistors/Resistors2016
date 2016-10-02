@@ -8,14 +8,8 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  * Created by Kevin on 09/25/16.
  */
 public class ResistorsHardware {
-    public DcMotor leftDrive = null;
-    public DcMotor rightDrive = null;
-    public DcMotor leftDrive2 = null;
-    public DcMotor rightDrive2 = null;
-    public Servo rightArm= null;
-    public Servo leftArm = null;
-    public Servo leftArm2 = null;
-    public Servo rightArm2 = null;
+    public DcMotor leftDrive, leftDrive2,rightDrive,rightDrive2 = null;
+    public Servo leftArm,leftArm2,rightArm,rightArm2= null;
     HardwareMap RhwMap           =  null;
     private ElapsedTime period  = new ElapsedTime();
 

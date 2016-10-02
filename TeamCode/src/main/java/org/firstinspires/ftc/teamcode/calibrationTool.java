@@ -1,4 +1,6 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires .ftc.teamcode;
+
+import com.qualcomm.ftccommon.DbgLog;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
 //TODO Check if we have encoders, cause this class is very dependant on it. If we don't then I waste effort :(
@@ -18,14 +20,8 @@ public class calibrationTool extends OpMode{
         rHW.init(hardwareMap);
     }
     @Override public void init_loop(){
-        if(slowSide){
-            rHW.rightDrive.setPower(1);
-            rHW.rightDrive2.setPower(1);
-        }else{
-            rHW.leftDrive.setPower(1);
-            rHW.leftDrive2.setPower(1);
-        }
         setDrive(slowSide,1);
+        setDrive(!slowSide,1);
     }
     float t1 = (float)time.milliseconds()/1000;
     float t2 = (float)time.milliseconds()/1000;
@@ -35,8 +31,8 @@ public class calibrationTool extends OpMode{
         if(slowSide) tune = rHW.rightDrive.getCurrentPosition()/rHW.leftDrive.getCurrentPosition();
         else tune = rHW.leftDrive.getCurrentPosition()/rHW.rightDrive.getCurrentPosition();
         setDrive(!slowSide,tune);
+        DbgLog.msg("Tune:" + tune);
         while (t2 < t1 + 2) t2= (float)time.milliseconds()/1000;//Let it drive for a bit to see how straight it is now
-        stop();
     }
     @Override public void stop(){
         rHW.leftDrive.setPower(0);

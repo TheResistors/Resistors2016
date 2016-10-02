@@ -68,28 +68,21 @@ public class ResistorsDrive extends OpMode{
         deltaSeconds = time2 - time1;
         if (Math.abs(-gamepad1.left_stick_y) > thresholdJoyStick)
             leftThrottle = -gamepad1.left_stick_y * throttleConstant * deltaSeconds;
-        else if (left > powerThreshold) leftThrottle = friction * deltaSeconds;
-        else if (left < -powerThreshold) leftThrottle = -friction* deltaSeconds;
-        else leftThrottle = 0;
+        else leftThrottle = friction * deltaSeconds * (left>powerThreshold ? 1:(left<powerThreshold ? -1:0));
         if (Math.abs(-gamepad1.right_stick_y) > thresholdJoyStick)
             rightThrottle = -gamepad1.right_stick_y * throttleConstant * deltaSeconds;
-        else if (right > powerThreshold) rightThrottle = friction * deltaSeconds;
-        else if (right < -powerThreshold) rightThrottle = -friction* deltaSeconds;
-        else rightThrottle = 0;
+        else rightThrottle = friction * deltaSeconds * (right>powerThreshold ? 1:(right<powerThreshold ? -1:0));
         //If you are within the threshold, you will slow down, if not your throttle will increase  til 1.
-        left = left + leftThrottle;
-        if (left > 1) left = 1; //Cap it at 1
-        right = right + rightThrottle;
-        if (right > 1) right = 1;//Kappa at 1
+        left = (left >1 ? 1:left + leftThrottle);//Cap it at 1
+        right = (right>1 ? 1:right + rightThrottle);//Kappa at 1
         standardDrive(left,right);
-        brakeCheck();
         time1 = time2;
         //Instead of the joysticks directly controlling the power, it controls the change in power, or throttle. Feels more like a car
         //No fkin clue if this'll work, I (Zheng) just pulled this out of my arse
     }
     private void setArm(float scaleVert,float scaleHora){
-        rHW.leftArm.setPosition(-gamepad2.left_stick_y*scaleVert);
-        rHW.rightArm.setPosition(-gamepad2.right_stick_y*scaleVert);
+        rHW.leftArm.setPosition(gamepad2.left_stick_y*scaleVert);
+        rHW.rightArm.setPosition(gamepad2.right_stick_y*scaleVert);
         rHW.leftArm2.setPosition(-gamepad2.left_stick_x*scaleHora);
         rHW.rightArm2.setPosition(-gamepad2.right_stick_x*scaleHora);
     }
