@@ -28,40 +28,20 @@ public class ResistorsDrive extends OpMode{
             right = 0;
     }
     private void standardDrive(float left,float right){
-        if (Math.abs(left) > thresholdJoyStick){
-            rHW.leftDrive.setPower(left);
-            rHW.leftDrive2.setPower(left);
-        } else{
-            rHW.leftDrive.setPower(0);
-            rHW.leftDrive2.setPower(0);
-        }
-        if(Math.abs(right) > thresholdJoyStick){
-            rHW.rightDrive.setPower(right);
-            rHW.rightDrive2.setPower(right);
-        }else{
-            rHW.rightDrive.setPower(0);
-            rHW.rightDrive2.setPower(0);
-        }
+        rHW.leftDrive.setPower((Math.abs(left) > thresholdJoyStick ? left: 0));
+        rHW.leftDrive2.setPower((Math.abs(left) > thresholdJoyStick ? left: 0));
+        rHW.rightDrive.setPower((Math.abs(right) > thresholdJoyStick ? right: 0));
+        rHW.rightDrive2.setPower((Math.abs(right) > thresholdJoyStick ? right: 0));
         //This is the standard drive loop. It *almost* most definitely works, so when sh*t hits the fan we use this.
         //Btw, it does the cancer jerk around thing. So, don't use if you aren't a(n) xbox god
     }
     private void tunedDrive(float left, float right, float leftTune, float rightTune){
-        if (Math.abs(left) > thresholdJoyStick){
-            rHW.leftDrive.setPower(left * leftTune);
-            rHW.leftDrive2.setPower(left * leftTune);
-        } else{
-            rHW.leftDrive.setPower(0);
-            rHW.leftDrive2.setPower(0);
-        }
-        if(Math.abs(right) > thresholdJoyStick){
-            rHW.rightDrive.setPower(right * rightTune);
-            rHW.rightDrive2.setPower(right * rightTune);
-        }else{
-            rHW.rightDrive.setPower(0);
-            rHW.rightDrive2.setPower(0);
-        }
+        rHW.leftDrive.setPower((Math.abs(left) > thresholdJoyStick ? left*leftTune: 0));
+        rHW.leftDrive2.setPower((Math.abs(left) > thresholdJoyStick ? left*leftTune: 0));
+        rHW.rightDrive.setPower((Math.abs(right) > thresholdJoyStick ? right* rightTune: 0));
+        rHW.rightDrive2.setPower((Math.abs(right) > thresholdJoyStick ? right*rightTune: 0));
         //Just in case the Mechanics can't balance the robot right, and it starts turning just tune the motors to a proper power output
-        //I guess for now, just try random tuning numbers to get it relatively straight
+        //Btw, this also does the cancer jerk arround thing.
     }
     private void throttleDrive(){
         time2 = (float)time.milliseconds()/1000;
