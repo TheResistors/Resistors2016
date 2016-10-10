@@ -9,11 +9,11 @@ public class calibrationTool extends OpMode{
     boolean right = true;
     boolean left = false; //Just to make things easier
     boolean slowSide = right;
-    ResistorsHardware rHW = new ResistorsHardware();
+    resistorsHardware4Drive rHW = new resistorsHardware4Drive();
     private ElapsedTime time = new ElapsedTime();
     public void setDrive(boolean side,double tune){
-        if(side){rHW.rightDrive.setPower(tune);rHW.rightDrive2.setPower(tune);
-        }else{rHW.leftDrive.setPower(tune);rHW.leftDrive2.setPower(tune);}
+        if(side){rHW.right(tune);
+        }else{rHW.left(tune);}
     }
     @Override public void start(){}
     @Override public void init(){
@@ -35,10 +35,8 @@ public class calibrationTool extends OpMode{
         while (t2 < t1 + 2) t2= (float)time.milliseconds()/1000;//Let it drive for a bit to see how straight it is now
     }
     @Override public void stop(){
-        rHW.leftDrive.setPower(0);
-        rHW.leftDrive2.setPower(0);
-        rHW.rightDrive.setPower(0);
-        rHW.rightDrive2.setPower(0);
+        rHW.right(0);
+        rHW.left(0);
         //Emergency Protocol! Stop everything!
     }
 }

@@ -3,7 +3,7 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 public class ResistorsDrive extends OpMode{
-    ResistorsHardware rHW = new ResistorsHardware();
+    resistorsHardware4Drive rHW = new resistorsHardware4Drive();
     @Override public void start(){}
     @Override public void init(){
         rHW.init(hardwareMap);
@@ -28,20 +28,16 @@ public class ResistorsDrive extends OpMode{
             right = 0;
     }
     private void standardDrive(float left,float right){
-        rHW.leftDrive.setPower((Math.abs(left) > thresholdJoyStick ? left: 0));
-        rHW.leftDrive2.setPower((Math.abs(left) > thresholdJoyStick ? left: 0));
-        rHW.rightDrive.setPower((Math.abs(right) > thresholdJoyStick ? right: 0));
-        rHW.rightDrive2.setPower((Math.abs(right) > thresholdJoyStick ? right: 0));
+        rHW.left((Math.abs(left) > thresholdJoyStick ? left: 0));
+        rHW.right((Math.abs(right) > thresholdJoyStick ? right: 0));
         //This is the standard drive loop. It *almost* most definitely works, so when sh*t hits the fan we use this.
         //Btw, it does the cancer jerk around thing. So, don't use if you aren't a(n) xbox god
     }
     private void tunedDrive(float left, float right, float leftTune, float rightTune){
-        rHW.leftDrive.setPower((Math.abs(left) > thresholdJoyStick ? left*leftTune: 0));
-        rHW.leftDrive2.setPower((Math.abs(left) > thresholdJoyStick ? left*leftTune: 0));
-        rHW.rightDrive.setPower((Math.abs(right) > thresholdJoyStick ? right* rightTune: 0));
-        rHW.rightDrive2.setPower((Math.abs(right) > thresholdJoyStick ? right*rightTune: 0));
+        rHW.left((Math.abs(left) > thresholdJoyStick ? left*leftTune: 0));
+        rHW.right((Math.abs(right) > thresholdJoyStick ? right* rightTune: 0));
         //Just in case the Mechanics can't balance the robot right, and it starts turning just tune the motors to a proper power output
-        //Btw, this also does the cancer jerk arround thing.
+        //Btw, this also does the cancer jerk around thing.
     }
     private void throttleDrive(){
         time2 = (float)time.milliseconds()/1000;
@@ -70,12 +66,11 @@ public class ResistorsDrive extends OpMode{
         standardDrive(-gamepad1.left_stick_y,-gamepad1.right_stick_y);
         brakeCheck();
         setArm(1,1);
+
     }
     @Override public void stop(){
-        rHW.leftDrive.setPower(0);
-        rHW.leftDrive2.setPower(0);
-        rHW.rightDrive.setPower(0);
-        rHW.rightDrive2.setPower(0);
+        rHW.left(0);
+        rHW.right(0);
         //Emergency Protocol! Stop everything!
     }
 }

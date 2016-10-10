@@ -12,32 +12,24 @@ public class ResistorsAuto extends OpMode{
     float rightTune = 1;
     boolean right = true;
     boolean left = false;
-    ResistorsHardware rHW = new ResistorsHardware();
+    resistorsHardware4Drive rHW = new resistorsHardware4Drive();
     private void forward(float meters){
         while(meters > rHW.leftDrive.getCurrentPosition()*diameter * pi/360 ){
-            rHW.leftDrive.setPower(speed * leftTune);
-            rHW.leftDrive2.setPower(speed* leftTune);
-            rHW.rightDrive.setPower(speed* rightTune);
-            rHW.rightDrive2.setPower(speed* rightTune);
+            rHW.left(speed*leftTune);
+            rHW.right(speed*rightTune);
         }
-        rHW.leftDrive.setPower(0);
-        rHW.leftDrive2.setPower(0);
-        rHW.rightDrive.setPower(0);
-        rHW.rightDrive2.setPower(0);
+        rHW.left(0);
+        rHW.right(0);
         //TODO Try to turn this into a gradual thing?
     }
     private void turnRad(float rad,boolean direction){//Right is true, left is false
         float distance = (robotWidth/2) * rad;
         while(distance > rHW.leftDrive.getCurrentPosition() *diameter * pi/360){
-            rHW.leftDrive.setPower(turningSpeed * leftTune * (direction ? 1 : -1) );
-            rHW.leftDrive2.setPower(turningSpeed * leftTune * (direction ? 1 : -1) );
-            rHW.rightDrive.setPower(-turningSpeed * rightTune * (direction ? 1 : -1));
-            rHW.rightDrive2.setPower(-turningSpeed * rightTune * (direction ? 1 : -1));
+            rHW.left(turningSpeed * leftTune * (direction ? 1 : -1));
+            rHW.right(-turningSpeed * rightTune * (direction ? 1 : -1));
         }
-        rHW.leftDrive.setPower(0);
-        rHW.leftDrive2.setPower(0);
-        rHW.rightDrive.setPower(0);
-        rHW.rightDrive2.setPower(0);
+        rHW.left(0);
+        rHW.right(0);
         //TODO Try to turn this into a gradual thing?
     }
     @Override public void start(){}
@@ -57,10 +49,8 @@ public class ResistorsAuto extends OpMode{
         justDrive();
     }
     @Override public void stop(){
-        rHW.leftDrive.setPower(0);
-        rHW.leftDrive2.setPower(0);
-        rHW.rightDrive.setPower(0);
-        rHW.rightDrive2.setPower(0);
+        rHW.left(0);
+        rHW.right(0);
         //Emergency Protocol! Stop everything!
     }
 }
