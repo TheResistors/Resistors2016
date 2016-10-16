@@ -1,5 +1,9 @@
 package org.firstinspires.ftc.teamcode;
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+@Autonomous(name = "ResistorsAuto", group = "ResistorsCustom")
+@Disabled
 //TODO import AI lmao
 //TODO Check if we have encoders, cause this class is very dependant on it. If we don't then I waste effort :(
 public class ResistorsAuto extends OpMode{

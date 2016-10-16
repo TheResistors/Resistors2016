@@ -1,7 +1,10 @@
 package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
-
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
+@TeleOp (name = "ResistorsDrive", group = "Resistors")
+@Disabled
 public class ResistorsDrive extends OpMode{
     resistorsHardware4Drive rHW = new resistorsHardware4Drive();
     @Override public void start(){}
@@ -30,7 +33,8 @@ public class ResistorsDrive extends OpMode{
     private void standardDrive(float left,float right){
         rHW.left((Math.abs(left) > thresholdJoyStick ? left: 0));
         rHW.right((Math.abs(right) > thresholdJoyStick ? right: 0));
-        //This is the standard drive loop. It *almost* most definitely works, so when sh*t hits the fan we use this.
+        //This is the standard drive loop. It *almost* most definitely works, so when sh*t hits the fan we use
+        // this.
         //Btw, it does the cancer jerk around thing. So, don't use if you aren't a(n) xbox god
     }
     private void tunedDrive(float left, float right, float leftTune, float rightTune){

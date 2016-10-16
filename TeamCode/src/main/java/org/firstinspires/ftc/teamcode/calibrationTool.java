@@ -3,7 +3,11 @@ package org.firstinspires .ftc.teamcode;
 import com.qualcomm.ftccommon.DbgLog;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 //TODO Check if we have encoders, cause this class is very dependant on it. If we don't then I waste effort :(
+@Autonomous (name = "Tool: Calibration",group = "Tool")
+@Disabled
 public class calibrationTool extends OpMode{
     float tune;
     boolean right = true;
